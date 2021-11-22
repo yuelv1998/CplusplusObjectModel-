@@ -36,3 +36,56 @@ int main()
 	return 1;
 }
 ```
+
+
+
+```c++
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include <iostream>
+#include <string>
+
+namespace _nmsp1
+{
+    // malloc来分配0个字节
+    
+    
+    
+    
+    void func()
+    {
+        void *p = malloc(0);    // new 调用的也是malloc，所以
+        char *pp = new char[0]; // 这种写法也是分配 0 字节
+        
+        std::cout << static_cast<void*>(&p) << std::endl;
+        std::cout << static_cast<void*>(&pp) << std::endl;
+        // 0x7ffc52eedb48
+        // 0x7ffc52eedb50
+        
+        char *q = (char*)p;
+        // strcpy(q, 100, "test_____");  // 这种写法，在这里就不能
+        
+        // 可以看到编译器对于malloc(0)确实给我们分配返回了一个地址，但是因为他是0字节内存，
+        // 所以这个，不代表我们就能去使用，更不能去修改这个地址中的内容
+        
+        free(p);
+        delete pp;
+    }
+}
+
+int main()
+{
+    _nmsp1::func();
+
+    return 0;
+}
+
+```
+
